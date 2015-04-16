@@ -4,7 +4,15 @@ from twisted.python import log
 
 from scrapy import optional_features
 
-collect_ignore = ["scrapy/stats.py", "scrapy/project.py"]
+collect_ignore = [
+    "scrapy/conf.py",
+    "scrapy/stats.py",
+    "scrapy/project.py",
+    "scrapy/contrib_exp/__init__.py",
+    "scrapy/contrib_exp/iterators.py",
+    "scrapy/contrib_exp/downloadermiddleware/__init__.py",
+    "scrapy/contrib_exp/downloadermiddleware/decompression.py",
+]
 if 'django' not in optional_features:
     collect_ignore.append("tests/test_djangoitem/models.py")
 
@@ -13,6 +21,7 @@ if six.PY3:
         file_path = line.strip()
         if len(file_path) > 0 and file_path[0] != '#':
             collect_ignore.append(file_path)
+
 
 class LogObservers:
     """Class for keeping track of log observers across test modules"""
